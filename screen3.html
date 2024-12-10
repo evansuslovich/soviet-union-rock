@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Screen 3</title>
+
+  <!-- External CSS -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@100..900&display=swap" rel="stylesheet">
+  <script src="fadeNavigation.js"></script>
+</head>
+<body>
+
+  <div class="combine">
+    <!-- Content Section -->
+    <div class="content-section">
+      <!-- Song 1 -->
+      <div class="song">
+        <div>
+
+        <img
+          src="./images/x-ray/heart-break-hotel.jpeg"
+          class="song-image"
+          alt="Heartbreak Hotel"
+        />
+        </div>
+        <div class="song-info">
+          <h1>Heartbreak Hotel</h1>
+          <h2>Artist: Elvis Presley</h2>
+          <h2>Composer: Tommy Durden / Mae Boren Axton</h2>
+          <h2>Lyrics: N/A</h2>
+          <button class="play-button" onclick="togglePlay('heart-break-hotel', this)">
+            ▶
+          </button>
+        </div>
+      </div>
+
+      <!-- Song 2 -->
+      <div class="song">
+        <div>
+        <img
+          src="./images/x-ray/lullaby-of-birdland.png"
+          class="song-image"
+          alt="Lullaby of Birdland"
+        />
+      </div>
+
+        <div class="song-info">
+          <h1>Lullaby of Birdland</h1>
+          <h2>Artist: Ella Fitzgerald</h2>
+          <h2>Composer: George Shearing</h2>
+          <h2>Lyrics: George Davis Weiss</h2>
+          <button class="play-button" onclick="togglePlay('lullaby-of-birdland', this)">
+            ▶
+          </button>
+        </div>
+      </div>
+
+      <!-- Song 3 -->
+      <div class="song">
+        <div>
+
+        <img
+          src="./images/x-ray/st-louis-blues.jpeg"
+          class="song-image"
+          alt="St Louis Blues"
+        />
+        </div>
+        <div class="song-info">
+          <h1>St Louis Blues</h1>
+          <h2>Artist: Unknown</h2>
+          <h2>Composer: W.C. Handy</h2>
+          <h2>Lyrics: W.C. Handy</h2>
+          <button class="play-button" onclick="togglePlay('st-louis-blues', this)">
+            ▶
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div style="display: block; width: 400px;">
+      <p style="line-height: 1.8; font-size: 18px; word-wrap: break-word;">
+        As everyday citizens peered through the cracks of the Iron Curtain, the demand for pop and jazz music grew uncontrollably. These genres, forbidden fruit under the Soviet regime, offered a thrilling glimpse into a world of freedom and creativity. Once people got a taste of this music, they craved more, and during periods of strict censorship, acquiring pop and jazz records became a subversive act of defiance. As one observer noted, "This led to the birth of a legendary phenomenon -- the memorable records 'on ribs'" (19, Back in the USSR: The True Story of Rock in Russia). 
+    
+        This ingenious phenomenon arose out of necessity and resilience. X-ray plates, which were inexpensive and readily available, became an unconventional yet perfect medium for smuggling and distributing music. These plates, originally used for medical imaging, were salvaged in bulk from hospitals. In the face of oppressive state control, citizens in Leningrad (now St. Petersburg) pioneered the art of etching bootleg records onto these discarded plates. This innovative practice quickly spread to Moscow and throughout the Soviet Union. 
+        
+        Creating these "bone music" records required both craftsmanship and ingenuity. The process involved cutting the X-ray plates into circles, etching grooves onto them using rudimentary tools, and often burning a small hole in the center to mimic the spindle of a conventional vinyl record. Each record told two stories: the music it carried and the shadowy medical history visible on the plastic, with faint traces of ribs, skulls, or other body parts adding to their mystique.
+        
+        These makeshift records became symbols of rebellion and cultural exchange. They allowed Soviet citizens to access forbidden sounds—jazz saxophones, rock guitar riffs, and pop harmonies—that transcended borders and ideologies. For a brief moment, the haunting images on the X-rays intertwined with the liberating rhythms of Western music, creating an enduring legacy of creativity in the face of oppression.
+
+      </p>
+      <p style="line-height: 1.8; font-size: 18px; word-wrap: break-word;">
+        The records and audios come from the X-Ray Audio Project. They are devoted to the underground community of music lovers and bootleggers who defied the censor in cold-war Soviet Union to make and distribute their own recordings of forbidden music. Please check them out:
+        <b>https://www.x-rayaudio.com/</b>
+      </p>
+  
+    </div>
+
+    
+    <span class="alt-header" style="width: 300px;">X-Rays to the Soul Union</span>
+
+  </div>
+
+  <div class="footer">
+    <a href="screen2.html">
+      <div class="arrow-left"></div>
+    </a>
+    <a href="screen4.html" class="arrow right">
+      <div class="arrow-right"></div>
+    </a>
+  </div>
+
+  <!-- Audio Elements (Hidden) -->
+  <audio id="heart-break-hotel" src="./images/x-ray/heartbreak-hotel.mp3"></audio>
+  <audio id="lullaby-of-birdland" src="./images/x-ray/lullaby-of-birdland.mp3"></audio>
+  <audio id="st-louis-blues" src="./images/x-ray/st-louis-blues.mp3"></audio>
+
+  <!-- JavaScript -->
+  <script>
+    let currentAudio = null;
+
+    function togglePlay(audioId, button) {
+      // Pause the currently playing audio if it's not the same as the clicked one
+      if (currentAudio && currentAudio.id !== audioId) {
+        currentAudio.pause();
+        currentAudio.currentTime = 0;
+        const previousButton = document.querySelector('.play-button.active');
+        if (previousButton) previousButton.textContent = '▶';
+      }
+
+      // Get the selected audio element
+      const audio = document.getElementById(audioId);
+
+      if (audio === currentAudio && !audio.paused) {
+        // Pause if the same audio is clicked again
+        audio.pause();
+        button.textContent = '▶'; // Reset button to play icon
+        button.classList.remove('active');
+        currentAudio = null;
+      } else {
+        // Play the selected audio
+        audio.play();
+        button.textContent = '⏸'; // Change button to pause icon
+        button.classList.add('active');
+        currentAudio = audio;
+      }
+    }
+  </script>
+
+</body>
+</html>
